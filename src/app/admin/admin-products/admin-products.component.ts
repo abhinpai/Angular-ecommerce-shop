@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProductsComponent implements OnInit {
 
-  constructor() { }
+  public product$;
+  public productref;
+
+
+// The Below Sanpshot method is for the latest AngularFire2+ version to access 
+// Node key and the value with the document format of the payload
+// If developer wants only to show/view the data into the view than use ValueChanges() 
+// Insted of SnapshotChanges()
+  constructor(private productService: ProductService) { 
+    this.productref = this.productService.getAll();
+    this.product$ = this.productref.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+  }
+
+
+  save(key){
+    console.log(key);
+    
+  }
 
   ngOnInit() {
   }
-
 }
