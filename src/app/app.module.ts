@@ -52,7 +52,7 @@ import { CustomFormsModule } from "ng2-validation";
     AngularFireAuthModule,
     RouterModule.forRoot([
       // Accessible for for the Anonymous user
-      { path: "", component: HomeComponent },
+      { path: "", component: ProductsComponent },
       { path: "products", component: ProductsComponent },
       { path: "cart", component: ShoppingCartsComponent },
       { path: "login", component: LoginComponent },
