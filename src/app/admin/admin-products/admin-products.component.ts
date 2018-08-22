@@ -1,3 +1,4 @@
+import { IProduct } from './../../models/IProduct';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../product.service';
 
@@ -16,6 +17,7 @@ export class AdminProductsComponent implements OnInit {
 // Node key and the value with the document format of the payload
 // If developer wants only to show/view the data into the view than use ValueChanges() 
 // Insted of SnapshotChanges()
+
   constructor(private productService: ProductService) { 
     this.productref = this.productService.getAll();
     this.product$ = this.productref.snapshotChanges().map(changes => {
@@ -24,9 +26,8 @@ export class AdminProductsComponent implements OnInit {
   }
 
 
-  save(key){
-    console.log(key);
-    
+  filter(seachString: string){
+
   }
 
   ngOnInit() {

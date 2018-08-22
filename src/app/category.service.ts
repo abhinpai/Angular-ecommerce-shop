@@ -12,9 +12,6 @@ export class CategoryService {
     return this.db.list('/categories', ref => ref.orderByChild('name')).valueChanges();
   }
 
-  
-
-
 }
 
 

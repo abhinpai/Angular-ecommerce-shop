@@ -2,7 +2,6 @@
   <a routerLink="/admin/product/new" class="btn btn-primary">Add New Product</a>
 </p>
 
-
 <table class="table">
   <thead>
     <tr>
@@ -16,7 +15,7 @@
       <td>{{item.title}}</td>
       <td>{{item.price}}</td>
       <td>
-        <button (click)="save(item.key)">Edit</button>
+        <a [routerLink]="['/admin/product/', item.key]">Edit</a>
       </td>
     </tr>
   </tbody>

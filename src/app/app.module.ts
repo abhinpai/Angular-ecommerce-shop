@@ -1,7 +1,7 @@
 import { CategoryService } from "./category.service";
 import { AuthGuard } from "./auth-guard.service";
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
@@ -25,7 +25,7 @@ import { AdminAuthGuard } from "./admin-auth-guard.service";
 import { ProductFormComponent } from "./admin/product-form/product-form.component";
 import { FormsModule } from "../../node_modules/@angular/forms";
 import { ProductService } from "./product.service";
-import { CustomFormsModule } from 'ng2-validation';
+import { CustomFormsModule } from "ng2-validation";
 
 @NgModule({
   declarations: [
@@ -74,6 +74,16 @@ import { CustomFormsModule } from 'ng2-validation';
         canActivate: [AuthGuard]
       },
       {
+        path: "admin/product/new",
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
+        path: "admin/product/:id",
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
         path: "admin/products",
         component: AdminProductsComponent,
         canActivate: [AuthGuard, AdminAuthGuard]
@@ -81,11 +91,6 @@ import { CustomFormsModule } from 'ng2-validation';
       {
         path: "admin/orders",
         component: AdminOrdersComponent,
-        canActivate: [AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: "admin/product/new",
-        component: ProductFormComponent,
         canActivate: [AuthGuard, AdminAuthGuard]
       }
     ])
@@ -98,6 +103,7 @@ import { CustomFormsModule } from 'ng2-validation';
     CategoryService,
     ProductService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}
