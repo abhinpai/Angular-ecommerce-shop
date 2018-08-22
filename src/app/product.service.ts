@@ -4,17 +4,11 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class ProductService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  getCategories(){
-    return this.db.list('/categories', ref => ref.orderByChild('name')).valueChanges();
+  create(product){
+   return this.db.list('/products').push(product);
   }
-
-  
-
-
 }
-
-

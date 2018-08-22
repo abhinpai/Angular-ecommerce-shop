@@ -1,4 +1,4 @@
-import { CategoryService } from './category.service';
+import { CategoryService } from "./category.service";
 import { AuthGuard } from "./auth-guard.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -22,7 +22,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "./auth.service";
 import { UserService } from "./user.service";
 import { AdminAuthGuard } from "./admin-auth-guard.service";
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ProductFormComponent } from "./admin/product-form/product-form.component";
+import { FormsModule } from "../../node_modules/@angular/forms";
+import { ProductService } from "./product.service";
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,8 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
   imports: [
     BrowserModule,
     NgbModule,
+    FormsModule,
+    CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -85,7 +90,14 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
       }
     ])
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGuard, CategoryService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard,
+    CategoryService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
