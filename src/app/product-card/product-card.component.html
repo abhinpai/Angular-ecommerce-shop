@@ -1,11 +1,11 @@
-<div  class="card" style="width: 18rem;">
-    <img class="card-img-top" alt="{{product.payload.val().title}}" src="{{product.payload.val().imageUrl}}l" *ngIf="product.payload.val().imageUrl">
-    <div class="card-body">
-      <h5 class="card-title">{{product.payload.val().title}}</h5>
-      <p class="card-text">{{product.payload.val().price | currency:'INR':true}}</p>
-    
-    </div>
-    <div class="card-footer">
-        <a href="#" class="btn btn-primary btn-block">Add to cart</a>
-    </div>
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" alt="{{product.payload.val().title}}" src="{{product.payload.val().imageUrl}}l" *ngIf="product.payload.val().imageUrl">
+  <div class="card-body">
+    <h5 class="card-title">{{product.payload.val().title}}</h5>
+    <p class="card-text">{{product.payload.val().price | currency:'INR'}}</p>
+
   </div>
+  <div class="card-footer">
+    <button (click)="addToCart(product)" class="btn btn-primary btn-block">Add to cart</button>
+  </div>
+</div>

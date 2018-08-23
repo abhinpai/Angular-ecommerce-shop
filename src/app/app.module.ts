@@ -29,6 +29,7 @@ import { CustomFormsModule } from "ng2-validation";
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartService } from "./shopping-cart.service";
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     UserService,
     AdminAuthGuard,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
