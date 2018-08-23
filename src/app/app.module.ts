@@ -27,6 +27,8 @@ import { FormsModule } from "../../node_modules/@angular/forms";
 import { ProductService } from "./product.service";
 import { CustomFormsModule } from "ng2-validation";
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductFilterComponent
+    ProductFilterComponent,
+    NotFoundComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,7 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
       { path: "products", component: ProductsComponent },
       { path: "cart", component: ShoppingCartsComponent },
       { path: "login", component: LoginComponent },
+      { path: "404-not-found", component: NotFoundComponent },
 
       // Restricted for the anonymous user
       {
