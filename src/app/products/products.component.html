@@ -1,12 +1,6 @@
 <div class="row">
   <div class="col-3">
-    <div class="list-group">
-      <a class="list-group-item lit-group-item-action" [class.active]="!category" routerLink="/"> All Categories</a>
-      <a *ngFor="let cat of category$; let i = index" routerLink="/" [queryParams]="{category: cat.key}" [class.active]="category == cat.key"
-        class="list-group-item">
-        {{cat.payload.val().name}}
-      </a>
-    </div>
+    <product-filter [category]="category"></product-filter>
   </div>
   <div class="col">
     <div class="row">
