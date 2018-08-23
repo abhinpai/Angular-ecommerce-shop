@@ -1,25 +1,12 @@
 <div class="row">
   <div class="col-3">
-    <div class="list-group">
-      <a class="list-group-item lit-group-item-action" [class.active]="!category" routerLink="/"> All Categories</a>
-      <a *ngFor="let cat of category$; let i = index" routerLink="/" [queryParams]="{category: cat.key}" [class.active]="category == cat.key"
-        class="list-group-item">
-        {{cat.payload.val().name}}
-      </a>
-    </div>
+    <product-filter [category]="category"></product-filter>
   </div>
   <div class="col">
     <div class="row">
       <ng-container *ngFor="let p of filteredProduct; let i = index">
         <div class="col">
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{p.payload.val().imageUrl}}l">
-            <div class="card-body">
-              <h5 class="card-title">{{p.payload.val().title}}</h5>
-              <p class="card-text">{{p.payload.val().price | currency:'INR':true}}</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
+          <product-card [product]="p"></product-card>
         </div>
         <div class="w-100" *ngIf="(i+1)%2 === 0"></div>
       </ng-container>

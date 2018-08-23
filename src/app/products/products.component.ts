@@ -13,7 +13,7 @@ import "rxjs/add/operator/switchMap";
 })
 export class ProductsComponent {
   public product$;
-  public category$;
+ 
   category: string;
   public filteredProduct: any[];
 
@@ -22,7 +22,7 @@ export class ProductsComponent {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private categoryService: CategoryService
+    
   ) {
     this.productService
       .getAll()
@@ -38,10 +38,6 @@ export class ProductsComponent {
             : this.products;
         });
       });
+    }
 
-    this.categoryService
-      .getCategory()
-      .snapshotChanges()
-      .subscribe(cat => (this.category$ = cat));
-  }
 }
