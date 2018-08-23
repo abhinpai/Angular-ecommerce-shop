@@ -24,7 +24,7 @@ export class ProductFormComponent {
     private productService: ProductService
   ) {
     this.categoryService
-      .getCategories()
+      .getAll()
       .subscribe(res => (this.categories$ = res));
 
     this.id = this.activatedRoute.snapshot.paramMap.get("id");

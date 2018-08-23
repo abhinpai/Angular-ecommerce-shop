@@ -1,23 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product.service';
+import { IProduct } from "./../models/IProduct";
+import { Component, OnInit } from "@angular/core";
+import { ProductService } from "../product.service";
+import { CategoryService } from "../category.service";
+import { ActivatedRoute } from "@angular/router";
+import { switchMap } from "rxjs/operators";
+import "rxjs/add/operator/switchMap";
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: "app-products",
+  templateUrl: "./products.component.html",
+  styleUrls: ["./products.component.css"]
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
+  public product$;
+  public category$;
+  category: string;
+  public filteredProduct: any[];
 
-  public product$; productref;
+  public products: any[] = [];
 
-  constructor(private productService: ProductService) { 
-    this.productref = this.productService.getAll();
-    this.product$ = this.productref.snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private categoryService: CategoryService
+  ) {
+    this.productService
+      .getAll()
+      .snapshotChanges()
+      .subscribe(products => {
+        this.products = products;
+        route.queryParamMap.subscribe(param => {
+          this.category = param.get("category");
+          this.filteredProduct = this.category
+            ? this.products.filter(
+                p => p.payload.val().category === this.category
+              )
+            : this.products;
+        });
+      });
+
+    this.categoryService
+      .getCategory()
+      .snapshotChanges()
+      .subscribe(cat => (this.category$ = cat));
   }
-
-  ngOnInit() {
-  }
-
 }
