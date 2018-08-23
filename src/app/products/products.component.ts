@@ -3,7 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { ProductService } from "../product.service";
 import { CategoryService } from "../category.service";
 import { ActivatedRoute } from "@angular/router";
-import { map } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
+import "rxjs/add/operator/switchMap";
 
 @Component({
   selector: "app-products",
@@ -14,8 +15,9 @@ export class ProductsComponent {
   public product$;
   public category$;
   category: string;
+  public filteredProduct: any[];
 
-  products: any[];
+  public products: any[] = [];
 
   constructor(
     private productService: ProductService,
@@ -25,15 +27,21 @@ export class ProductsComponent {
     this.productService
       .getAll()
       .snapshotChanges()
-      .subscribe(products => (this.products = products));
+      .subscribe(products => {
+        this.products = products;
+        route.queryParamMap.subscribe(param => {
+          this.category = param.get("category");
+          this.filteredProduct = this.category
+            ? this.products.filter(
+                p => p.payload.val().category === this.category
+              )
+            : this.products;
+        });
+      });
 
     this.categoryService
       .getCategory()
       .snapshotChanges()
       .subscribe(cat => (this.category$ = cat));
-
-    route.queryParamMap.subscribe(param => {
-      this.category = param.get("category");
-    });
   }
 }
