@@ -2,7 +2,7 @@ import { AppUser } from './models/app-user';
 import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
-import * as firebase from "firebase";
+import * as firebase from "firebase/app";
 import { Observable } from "../../node_modules/rxjs";
 import { ActivatedRoute } from "../../node_modules/@angular/router";
 import { UserService } from "./user.service";
